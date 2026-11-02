@@ -1,3 +1,5 @@
+@import url('https://googleapis.com');
+
 /* --- CONFIGURATION GLOBALE --- */
 * {
     margin: 0;
@@ -8,11 +10,15 @@
 body {
     background-color: #0b0b0b;
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+.logo h1, nav a, h2, .card-category {
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* --- EN-TÊTE / NAVIGATION --- */
@@ -37,7 +43,7 @@ header {
 
 .logo span {
     display: block;
-    font-size: 0.65rem;
+    font-size: 1rem;
     letter-spacing: 2px;
     color: #888;
     margin-top: 4px;
@@ -53,7 +59,7 @@ nav a {
     color: #aaa;
     text-decoration: none;
     font-size: 0.85rem;
-    text-transform: uppercase;
+    text-transform: none;
     letter-spacing: 1px;
     transition: color 0.3s;
 }
@@ -75,13 +81,41 @@ main {
 h2 {
     font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     margin-bottom: 1rem;
     color: #aaa;
     font-weight: 400;
 }
 
-/* --- SCÈNE CARROUSEL 3D (style Revolution Slider / coverflow) --- */
+.bio-contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 2rem 4rem 1rem;
+}
+
+.bio-contact p {
+    max-width: 38rem;
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.contact a {
+    display: inline-block;
+    margin-top: 0.75rem;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 0.2rem;
+    transition: border-color 0.3s ease;
+}
+
+.contact a:hover {
+    border-color: #fff;
+}
+
+/* --- SCÈNE CARROUSEL 3D  --- */
 .carousel-stage {
     position: relative;
     width: 100%;
@@ -95,7 +129,7 @@ h2 {
 /* --- FLÈCHES DE NAVIGATION --- */
 .nav-arrow {
     position: absolute;
-    top:80%;
+    top:50%;
     transform: translateY(-50%);
     width: 45px;
     height: 45px;
@@ -106,7 +140,7 @@ h2 {
     font-size: 1.2rem;
     cursor: pointer;
     z-index: 60;
-    display: flex;
+    display: none; /*avant flex*/
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
@@ -184,6 +218,9 @@ h2 {
         letter-spacing: 1px;
     }
 
+    .nav-arrow {
+        display: none;
+    }
     nav ul {
         gap: 1rem;
     }
@@ -194,6 +231,11 @@ h2 {
 
     main {
         padding: 0 1.5rem;
+    }
+
+    .bio-contact {
+        padding: 2rem 1.5rem 1rem;
+        gap: 2rem;
     }
 
     footer {
@@ -208,11 +250,11 @@ h2 {
 
     .project-card {
         --w: min(300px, calc(100vw - 2rem));
-        top: 25%;
+        top: 5%;
     }
 
     .carousel-stage {
-        height: 360px;
+        height: 440px;
         perspective: 1000px;
     }
 
@@ -230,6 +272,12 @@ h2 {
     main {
         padding: 0 1rem;
         margin-top: 24vh;
+    }
+
+    .bio-contact {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem 1rem 0;
     }
 
     .card-info {
@@ -252,12 +300,6 @@ h2 {
 
     .play-btn::before {
         border-width: 7px 0 7px 12px;
-    }
-
-    /* Lecteur global compact */
-    .global-player {
-        padding: 0.7rem 1rem;
-        gap: 0.75rem;
     }
 
     .gp-cover {
@@ -507,5 +549,35 @@ footer {
 
     .gp-time {
         display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .carousel-stage {
+        overflow: hidden;
+    }
+
+    footer {
+        padding: 1rem;
+    }
+
+    body.player-active footer {
+        padding-bottom: 4.5rem;
+    }
+
+    .global-player {
+        padding: 0.7rem 1rem;
+    }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+    @media (max-width: 600px) {
+        .global-player {
+            padding-bottom: calc(0.7rem + env(safe-area-inset-bottom));
+        }
+
+        body.player-active footer {
+            padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+        }
     }
 }

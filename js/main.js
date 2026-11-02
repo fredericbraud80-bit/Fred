@@ -57,10 +57,11 @@ function applyPosition(card, position, distance) {
     const x = position * COVERFLOW.offsetX;
     const rot = -position * COVERFLOW.rotateY;
     const scale = Math.max(0.2, 1 - distance * 0.2);
+    const blur = Math.min(distance * 0.6, 1.2);
 
     card.style.zIndex = String(50 - Math.round(distance));
     card.style.pointerEvents = 'auto';
-    card.style.filter = distance === 0 ? 'none' : 'brightness(' + (1 - distance * 0.18) + ')';
+    card.style.filter = 'brightness(' + (1 - distance * 0.18) + ') blur(' + blur + 'px)';
     card.style.transform =
         'translate3d(' + x + '%, 0, 0) rotateY(' + rot + 'deg) scale(' + scale + ')';
 }
@@ -246,6 +247,7 @@ function setGlobalTrack(track) {
     gpCover.style.backgroundImage = 'url(' + track.cover + ')';
     gpTitle.textContent = track.title;
     playerBar.classList.add('visible');
+    document.body.classList.add('player-active');
     setPlayingCard(track.id);
     globalAudio.play();
 }
