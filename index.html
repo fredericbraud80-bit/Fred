@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frédéric Braud | Mon Portfolio Musical </title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Frédéric Braud</h1>
+            <span>Composition - Arrangements - Guitariste</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#projets">Ecoute</a></li>
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 id="projets">Ma musique</h2>
+
+        <!-- Scène du carrousel 3D -->
+        <div class="carousel-stage" id="carouselStage">
+            <button class="nav-arrow arrow-left" id="prevBtn" aria-label="Précédent">&#10094;</button>
+
+            <button class="nav-arrow arrow-right" id="nextBtn" aria-label="Suivant">&#10095;</button>
+
+            <!-- Vignette 1 -->
+            <div class="project-card" data-track-id="1"
+                data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                data-cover="https://picsum.photos/seed/leit1/200">
+                <div class="card-media" style="background-image: url('https://picsum.photos/seed/leit1/640/360');">
+                    <button class="play-btn" aria-label="Écouter l'extrait"></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Échos de l'Horizon</div>
+                    <div class="card-category">Long-métrage / 2026</div>
+                </div>
+            </div>
+
+            <!-- Vignette 2 -->
+            <div class="project-card" data-track-id="2"
+                data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+                data-cover="https://picsum.photos/seed/leit2/200/200">
+                <div class="card-media" style="background-image: url('https://picsum.photos/seed/leit2/640/360');">
+                    <button class="play-btn" aria-label="Écouter l'extrait"></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Cyber-Oasis</div>
+                    <div class="card-category">Série TV / 2025</div>
+                </div>
+            </div>
+
+            <!-- Vignette 3 -->
+            <div class="project-card" data-track-id="3"
+                data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+                data-cover="https://picsum.photos/seed/leit3/200/200">
+                <div class="card-media" style="background-image: url('https://picsum.photos/seed/leit3/640/360');">
+                    <button class="play-btn" aria-label="Écouter l'extrait"></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Sous la Glace</div>
+                    <div class="card-category">Documentaire / 2026</div>
+                </div>
+            </div>
+
+            <!-- Vignette 4 -->
+            <div class="project-card" data-track-id="4"
+                data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+                data-cover="https://picsum.photos/seed/leit4/200/200">
+                <div class="card-media" style="background-image: url('https://picsum.photos/seed/leit4/640/360');">
+                    <button class="play-btn" aria-label="Écouter l'extrait"></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Le Dernier Vol</div>
+                    <div class="card-category">Court-métrage / 2024</div>
+                </div>
+            </div>
+
+            <!-- Vignette 5 -->
+            <div class="project-card" data-track-id="5"
+                data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+                data-cover="https://picsum.photos/seed/leit5/200/200">
+                <div class="card-media" style="background-image: url('https://picsum.photos/seed/leit5/640/360');">
+                    <button class="play-btn" aria-label="Écouter l'extrait"></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Au-delà du Réel</div>
+                    <div class="card-category">Animation / 2025</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Frédéric Braud — Droits d'auteur simulés pour l'intégration.</p>
+    </footer>
+
+    <div class="global-player" id="globalPlayerBar" role="region" aria-label="Lecteur audio global">
+        <div class="gp-cover" id="gpCover"></div>
+        <button class="gp-toggle" id="gpToggle" aria-label="Lecture / Pause">
+            <svg id="gpIcon" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                <polygon points="2,0 14,7 2,14" />
+            </svg>
+        </button>
+        <div class="gp-meta">
+            <div class="gp-title" id="gpTitle">—</div>
+            <div class="gp-sub">extrait · lecteur global</div>
+        </div>
+        <div class="gp-progress" id="gpProgress">
+            <div class="gp-progress-bar" id="gpProgressBar"></div>
+        </div>
+        <span class="gp-time" id="gpTime">0:00 / 0:00</span>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
