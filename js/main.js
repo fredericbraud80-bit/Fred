@@ -29,7 +29,7 @@ function wrappedOffset(i, position = current) {
 
 function layout() {
     const position = isDragging
-        ? current - dragOffsetX / (cards[0].offsetWidth * COVERFLOW.offsetX / 100)
+        ? dragStartPosition - dragOffsetX / (cards[0].offsetWidth * COVERFLOW.offsetX / 100)
         : isAnimating ? animationPosition : current;
 
     cards.forEach((card, i) => {
@@ -125,16 +125,20 @@ cards.forEach((card, i) => {
 let activePointerId = null;
 let startX = 0;
 let startY = 0;
+let dragStartPosition = 0;
+let dragInterruptedAnimation = false;
 let isDragging = false;
 let suppressClickTimer;
 
 stage.addEventListener('pointerdown', (e) => {
-    if (isAnimating || !e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0) ||
+    if (!e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0) ||
         e.target.closest('.nav-arrow')) return;
 
     activePointerId = e.pointerId;
     startX = e.clientX;
     startY = e.clientY;
+    dragStartPosition = isAnimating ? animationPosition : current;
+    dragInterruptedAnimation = false;
     isDragging = false;
 });
 
@@ -144,6 +148,14 @@ window.addEventListener('pointermove', (e) => {
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
     if (!isDragging && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        dragInterruptedAnimation = isAnimating;
+        dragStartPosition = dragInterruptedAnimation ? animationPosition : current;
+        if (isAnimating) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+            isAnimating = false;
+            stage.classList.remove('is-animating');
+        }
         isDragging = true;
         stage.classList.add('is-dragging');
     }
@@ -160,9 +172,9 @@ function finishDrag(e, shouldNavigate) {
     const dx = e.clientX - startX;
     const wasDragging = isDragging;
     const stepWidth = cards[0].offsetWidth * COVERFLOW.offsetX / 100;
-    const releasedPosition = current - dx / stepWidth;
+    const releasedPosition = dragStartPosition - dx / stepWidth;
     let target = Math.round(releasedPosition);
-    if (target === current && Math.abs(dx) > 40) {
+    if (!dragInterruptedAnimation && target === current && Math.abs(dx) > 40) {
         target += dx < 0 ? 1 : -1;
     }
     const shouldChangeCard = shouldNavigate && wasDragging && target !== current;
