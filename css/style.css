@@ -362,6 +362,10 @@ h2 {
         display: none;
     }
 
+    .carousel-stage {
+        animation: none;
+    }
+
     .project-card {
         --w: min(300px, calc(100vw - 2rem));
         top: 5%;
